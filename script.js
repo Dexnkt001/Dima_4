@@ -1,15 +1,15 @@
 const images = document.images,
 itemsList = document.querySelectorAll('li'),
-list = document.querySelector('ul');
+list = document.getElementById('list');
 
 function showChoosePicture(e){
     if (e.target !== list){
+        for (key of images){
+            key.classList.remove('active')
+        }
 images[e.target.id-1].classList.add('active')
     }
-    let temp;
-    temp = images[e.target.id-1];
-    images[e.target.id-1] = images[0];
-    images[0] = temp;
+  
 }
 
 function deleteAll(){
@@ -33,9 +33,16 @@ for (key of images){
 }   
   }
 
+  function newWord(){
+    itemsList[1].innerHTML = document.getElementById('input').value;
+   images[1].src = './picture/sneg.svg';
+   images[1].alt = 'sneg';
+}
+
 
 
 list.addEventListener('click', showChoosePicture);
-document.querySelector('.delete').addEventListener('mousedown', deleteAll);
-document.querySelector('h1').addEventListener('mousedown', showAll);
-document.querySelector('.buttons').addEventListener('mousedown', newWindow);
+document.getElementById('delete').addEventListener('mousedown', deleteAll);
+document.getElementById('title').addEventListener('mousedown', showAll);
+//document.getElementById('buttons').addEventListener('mousedown', newWindow);
+document.getElementById('submit').addEventListener('click', newWord)

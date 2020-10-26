@@ -10,6 +10,10 @@
   flex-direction: column;
 }
 
+h1 {
+  cursor: pointer;
+}
+
 li {
   cursor: pointer;
   margin-top: 3px;
@@ -18,10 +22,11 @@ li {
 .images {
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
 }
 
 img {
-  width: 150px;
+  width: 300px;
   height: auto;
   display: none;
 }
@@ -32,4 +37,10 @@ img {
 
 .buttons {
   display: flex;
+  margin-top: 20px;
+}
+
+.text {
+  display: flex;
+  margin-top: 20px;
 }
