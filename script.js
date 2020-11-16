@@ -2,14 +2,30 @@ const images = document.images,
 itemsList = document.querySelectorAll('li'),
 list = document.getElementById('list');
 
+let arr_pict = [["./picture/blue_lake.jpg", 'first'],
+["./picture/house.jpg", 'second'],
+["./picture/lake_and_mountins.jpg", 'third'],
+["./picture/mrachniy_zakat.jpg", 'forth'],
+["./picture/sia.jpg", 'fivth'],
+["./picture/zakat.jpg", 'sixth']
+],
+str = '',
+pos = [];
+
 function showChoosePicture(e){
     if (e.target !== list){
         for (key of images){
             key.classList.remove('active')
         }
-images[e.target.id-1].classList.add('active')
+images[e.target.id].classList.add('active');
+itemsList.forEach(element => element.classList.remove('active_list'));
+e.target.classList.add('active_list');
     }
-  
+if (Number.parseInt(e.target.id) !== 0){
+  pos = arr_pict[0];
+  arr_pict[0] = arr_pict[Number.parseInt(e.target.id)];
+  arr_pict[Number.parseInt(e.target.id)] = pos;
+}
 }
 
 function deleteAll(){
@@ -24,19 +40,22 @@ function showAll(){
     }
 }
 
-newWindow = function(size) {
-   const newWin = window.open("./second.html", "hello", "width=600,height=400");
-    let div = newWin.document.createElement('div');
-    document.body.append(div);
-for (key of images){
-    newWin.document.write(`<img ${key.attributes[0]} ${key.attributes[1]} width = ${size}px height = auto`);
-}   
-  }
+const newStr = () =>{
+ arr_pict.forEach(element => {
+   str = str + `<img src='${element[0]}' alt='${element[1]}' width = '600px' height = '400px'/>`
+ })
+}
 
-  function newWord(){
-    itemsList[1].innerHTML = document.getElementById('input').value;
-   images[1].src = './picture/sneg.svg';
-   images[1].alt = 'sneg';
+
+let newWindow = (width, height) => {
+newStr();
+let newWin = window.open('about:blank', 'Picture', `width = ${width} height = ${height}`);
+newWin.document.write(`
+
+<div style = "display : flex">
+${str}
+</div>
+`);
 }
 
 
@@ -44,5 +63,5 @@ for (key of images){
 list.addEventListener('click', showChoosePicture);
 document.getElementById('delete').addEventListener('mousedown', deleteAll);
 document.getElementById('title').addEventListener('mousedown', showAll);
-//document.getElementById('buttons').addEventListener('mousedown', newWindow);
-document.getElementById('submit').addEventListener('click', newWord)
+document.getElementById('buttons').addEventListener('mousedown', ()=>{newWindow(1300, 500)});
+//document.getElementById('submit').addEventListener('click', newWord);
