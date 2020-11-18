@@ -2,15 +2,16 @@ const images = document.images,
 itemsList = document.querySelectorAll('li'),
 list = document.getElementById('list');
 
-let arr_pict = [["./picture/blue_lake.jpg", 'first'],
-["./picture/house.jpg", 'second'],
-["./picture/lake_and_mountins.jpg", 'third'],
-["./picture/mrachniy_zakat.jpg", 'forth'],
-["./picture/sia.jpg", 'fivth'],
-["./picture/zakat.jpg", 'sixth']
+let arr_pict = [["./picture/blue_lake.jpg", 'first', "Голубое озеро"],
+["./picture/house.jpg", 'second', "Пруд"],
+["./picture/lake_and_mountins.jpg", 'third', "Красиовое озеро с горами"],
+["./picture/mrachniy_zakat.jpg", 'forth', "Закат в мрачное время"],
+["./picture/sia.jpg", 'fivth', "Океан"],
+["./picture/zakat.jpg", 'sixth',"Красивый закат"]
 ],
 str,
-pos = [];
+pos = [],
+index;
 
 function showChoosePicture(e){
     if (e.target !== list){
@@ -20,12 +21,14 @@ function showChoosePicture(e){
 images[e.target.id].classList.add('active');
 itemsList.forEach(element => element.classList.remove('active_list'));
 e.target.classList.add('active_list');
+arr_pict.forEach((element, index) => {
+  if(e.target.innerHTML === element[2] && index !== 0){
+pos = element;
+arr_pict[index]=arr_pict[0];
+arr_pict[0]= pos;
+  }
+})
     }
-if (Number.parseInt(e.target.id) !== 0){
-  pos = arr_pict[0];
-  arr_pict[0] = arr_pict[Number.parseInt(e.target.id)];
-  arr_pict[Number.parseInt(e.target.id)] = pos;
-}
 }
 
 function deleteAll(){
@@ -37,6 +40,7 @@ function deleteAll(){
 function showAll(){
     for (key of images){
         key.classList.toggle('active');
+        console.log(key);
     }
 }
 
@@ -59,10 +63,25 @@ ${str}
 `);
 }
 
+function newWord(){
+  itemsList[1].innerHTML = document.getElementById('input').value;
+  itemsList[1].id = '1';
+ images[1].src = './picture/sneg.svg';
+ images[1].alt = 'sneg';
+ images[1].classList.add('active');
+itemsList.forEach(element => element.classList.remove('active_list'));
+document.querySelectorAll('li')[1].classList.add('active_list');
+ pos = arr_pict[0];
+ arr_pict[0] = ['./picture/sneg.svg', 'sneg',  itemsList[1].innerHTML];
+ arr_pict[1]=pos;
+ console.log(arr_pict);
+}
+
+
 
 
 list.addEventListener('click', showChoosePicture);
 document.getElementById('delete').addEventListener('mousedown', deleteAll);
 document.getElementById('title').addEventListener('mousedown', showAll);
 document.getElementById('buttons').addEventListener('mousedown', ()=>{newWindow(1300, 500)});
-//document.getElementById('submit').addEventListener('click', newWord);
+document.getElementById('submit').addEventListener('click', newWord);

@@ -10,13 +10,31 @@
   flex-direction: column;
 }
 
+ul {
+  list-style: none;
+  border: 1px solid black;
+  background-color: rgb(173, 173, 173);
+  border-radius: 4px;
+}
+
 h1 {
   cursor: pointer;
 }
 
 li {
   cursor: pointer;
-  margin-top: 3px;
+  border-top: 1px solid black;
+  padding: 3px 0 3px 0;
+  transition: all 0.2s ease;
+}
+
+li:first-child {
+  border-top: none;
+}
+
+li:hover {
+  background-color: aqua;
+  opacity: 0.5;
 }
 
 .images {
